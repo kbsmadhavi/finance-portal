@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finance Portal</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Sidebar -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <span class="logo">💰</span>
+      <h1 class="brand">FinancePortal</h1>
+    </div>
+    <ul class="nav-links">
+      <li class="active" data-section="dashboard"><span class="icon">📊</span> Dashboard</li>
+      <li data-section="transactions"><span class="icon">💳</span> Transactions</li>
+      <li data-section="budget"><span class="icon">📋</span> Budget</li>
+      <li data-section="accounts"><span class="icon">🏦</span> Accounts</li>
+    </ul>
+    <div class="sidebar-footer">
+      <div class="user-info">
+        <div class="avatar">JD</div>
+        <div>
+          <div class="user-name">Jane Doe</div>
+          <div class="user-role">Personal Finance</div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Top Bar -->
+    <header class="topbar">
+      <h2 class="page-title" id="page-title">Dashboard</h2>
+      <div class="topbar-right">
+        <span class="date" id="current-date"></span>
+        <button class="btn-primary" id="add-transaction-btn">+ Add Transaction</button>
+      </div>
+    </header>
+
+    <!-- Dashboard Section -->
+    <section id="section-dashboard" class="section active">
+      <!-- Summary Cards -->
+      <div class="cards-grid">
+        <div class="card card-balance">
+          <div class="card-icon">💼</div>
+          <div class="card-body">
+            <div class="card-label">Total Balance</div>
+            <div class="card-value" id="total-balance">$0.00</div>
+            <div class="card-change positive">+2.4% this month</div>
+          </div>
+        </div>
+        <div class="card card-income">
+          <div class="card-icon">⬆️</div>
+          <div class="card-body">
+            <div class="card-label">Monthly Income</div>
+            <div class="card-value" id="monthly-income">$0.00</div>
+            <div class="card-change positive">+5.1% vs last month</div>
+          </div>
+        </div>
+        <div class="card card-expenses">
+          <div class="card-icon">⬇️</div>
+          <div class="card-body">
+            <div class="card-label">Monthly Expenses</div>
+            <div class="card-value" id="monthly-expenses">$0.00</div>
+            <div class="card-change negative">+1.8% vs last month</div>
+          </div>
+        </div>
+        <div class="card card-savings">
+          <div class="card-icon">🏦</div>
+          <div class="card-body">
+            <div class="card-label">Savings Rate</div>
+            <div class="card-value" id="savings-rate">0%</div>
+            <div class="card-change positive">On track</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts Row -->
+      <div class="charts-row">
+        <div class="chart-card">
+          <h3>Spending by Category</h3>
+          <div class="donut-chart" id="donut-chart"></div>
+          <div class="legend" id="chart-legend"></div>
+        </div>
+        <div class="chart-card chart-wide">
+          <h3>Income vs Expenses (Last 6 Months)</h3>
+          <div class="bar-chart-container">
+            <div class="bar-chart" id="bar-chart"></div>
+            <div class="bar-labels" id="bar-labels"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Transactions -->
+      <div class="table-card">
+        <div class="table-header">
+          <h3>Recent Transactions</h3>
+          <a href="#" class="link" data-section="transactions">View All</a>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Category</th>
+              <th>Date</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody id="recent-transactions-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Transactions Section -->
+    <section id="section-transactions" class="section">
+      <div class="filter-bar">
+        <input type="text" id="search-input" placeholder="Search transactions…" class="search-input" />
+        <select id="category-filter" class="select-filter">
+          <option value="">All Categories</option>
+        </select>
+        <select id="type-filter" class="select-filter">
+          <option value="">All Types</option>
+          <option value="income">Income</option>
+          <option value="expense">Expense</option>
+        </select>
+      </div>
+      <div class="table-card">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Category</th>
+              <th>Date</th>
+              <th>Type</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody id="all-transactions-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Budget Section -->
+    <section id="section-budget" class="section">
+      <div class="cards-grid cards-grid-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-label">Total Budget</div>
+            <div class="card-value" id="total-budget">$0.00</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <div class="card-label">Total Spent</div>
+            <div class="card-value" id="total-spent">$0.00</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <div class="card-label">Remaining</div>
+            <div class="card-value" id="total-remaining">$0.00</div>
+          </div>
+        </div>
+      </div>
+      <div class="table-card">
+        <h3 style="margin-bottom:1.5rem;">Budget Overview</h3>
+        <div id="budget-bars"></div>
+      </div>
+    </section>
+
+    <!-- Accounts Section -->
+    <section id="section-accounts" class="section">
+      <div class="accounts-grid" id="accounts-grid"></div>
+    </section>
+  </main>
+
+  <!-- Add Transaction Modal -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Add Transaction</h3>
+        <button class="modal-close" id="modal-close">✕</button>
+      </div>
+      <form id="transaction-form">
+        <div class="form-group">
+          <label>Description</label>
+          <input type="text" id="form-description" placeholder="e.g. Grocery shopping" required />
+        </div>
+        <div class="form-group">
+          <label>Amount ($)</label>
+          <input type="number" id="form-amount" placeholder="0.00" min="0.01" step="0.01" required />
+        </div>
+        <div class="form-group">
+          <label>Type</label>
+          <select id="form-type">
+            <option value="expense">Expense</option>
+            <option value="income">Income</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select id="form-category">
+            <option value="Food">Food</option>
+            <option value="Transport">Transport</option>
+            <option value="Housing">Housing</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Healthcare">Healthcare</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Salary">Salary</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" id="form-date" required />
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" id="cancel-btn">Cancel</button>
+          <button type="submit" class="btn-primary">Add Transaction</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
